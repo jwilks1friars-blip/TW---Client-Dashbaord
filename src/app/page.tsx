@@ -1,12 +1,24 @@
 "use client"
 
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
 import { DashboardSidebar } from "@/components/dashboard-sidebar"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Activity, Calendar, TrendingUp, Target } from "lucide-react"
+import { getAuthenticatedClient, clearAuthenticatedClient } from "@/lib/auth"
 
 export default function DashboardPage() {
+  const router = useRouter()
+
+  // Check authentication on mount
+  useEffect(() => {
+    const client = getAuthenticatedClient()
+    if (!client) {
+      router.push("/login")
+    }
+  }, [router])
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
