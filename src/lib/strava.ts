@@ -6,7 +6,7 @@
 const STRAVA_CLIENT_ID = "191041"
 const STRAVA_REDIRECT_URI =
   typeof window !== "undefined"
-    ? `${window.location.origin}/api/strava/callback`
+    ? `${window.location.origin}/strava/callback`
     : ""
 
 export interface StravaToken {

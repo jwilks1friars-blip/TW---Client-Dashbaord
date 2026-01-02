@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { exchangeCodeForToken, setStravaToken } from "@/lib/strava"
 import { getAuthenticatedClient } from "@/lib/auth"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
-export default function StravaCallbackPage() {
+function StravaCallbackContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [status, setStatus] = useState<"loading" | "success" | "error">("loading")
@@ -76,6 +76,28 @@ export default function StravaCallbackPage() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+export default function StravaCallbackPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle>Strava Connection</CardTitle>
+            <CardDescription>Loading...</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    }>
+      <StravaCallbackContent />
+    </Suspense>
   )
 }
 
