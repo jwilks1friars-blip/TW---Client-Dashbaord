@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Activity, Calendar, TrendingUp, Target } from "lucide-react"
 import { getAuthenticatedClient, clearAuthenticatedClient } from "@/lib/auth"
 import { StravaActivities } from "@/components/strava-activities"
+import { StravaConnectCard } from "@/components/strava-connect-card"
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -76,6 +77,9 @@ export default function DashboardPage() {
               </Card>
             </div>
 
+            {/* Strava Connect Card */}
+            <StravaConnectCard />
+
             {/* Content Grid */}
             <div className="grid gap-4 md:grid-cols-2">
               <Card>
@@ -133,7 +137,9 @@ export default function DashboardPage() {
             </Card>
 
             {/* Strava Activities */}
-            <StravaActivities />
+            <div id="strava-activities">
+              <StravaActivities />
+            </div>
           </div>
         </SidebarInset>
       </div>
