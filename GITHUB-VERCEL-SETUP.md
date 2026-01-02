@@ -18,7 +18,7 @@
    - Click "Create repository"
 
 3. **Copy the Repository URL**
-   - GitHub will show you a URL like: `https://github.com/jwilks1friars-6300/client-dashboard.git`
+   - Your repository URL is: `https://github.com/jwilks1friars-blip/TW---Client-Dashbaord.git`
    - **Copy this URL** - you'll need it in Step 2
 
 ### Step 2: Initialize Git in Your Dashboard Folder
@@ -39,14 +39,14 @@ git add .
 git commit -m "Initial commit: Client dashboard with Next.js and shadcn/ui"
 
 # Add your GitHub repository
-git remote add origin https://github.com/jwilks1friars-6300/client-dashboard.git
+git remote add origin https://github.com/jwilks1friars-blip/TW---Client-Dashbaord.git
 
 # Push to GitHub
 git branch -M main
 git push -u origin main
 ```
 
-**Note:** Using GitHub username: `jwilks1friars-6300`
+**Note:** Your repository URL: `https://github.com/jwilks1friars-blip/TW---Client-Dashbaord.git`
 
 ### Step 3: Connect to Vercel
 
@@ -117,7 +117,7 @@ Follow the prompts:
 
 ### "Permission denied"
 - You may need to authenticate with GitHub
-- Try: `git remote set-url origin https://jwilks1friars-6300@github.com/jwilks1friars-6300/client-dashboard.git`
+- Try: `git remote set-url origin https://jwilks1friars-blip@github.com/jwilks1friars-blip/TW---Client-Dashbaord.git`
 - Or use SSH instead of HTTPS
 
 ### "Build failed on Vercel"
@@ -146,7 +146,7 @@ git add .
 git commit -m "Your commit message"
 
 # Add remote (first time only)
-git remote add origin https://github.com/jwilks1friars-6300/client-dashboard.git
+git remote add origin https://github.com/jwilks1friars-blip/TW---Client-Dashbaord.git
 
 # Push to GitHub
 git push -u origin main
