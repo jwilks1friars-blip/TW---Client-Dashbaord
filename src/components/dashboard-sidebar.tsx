@@ -30,32 +30,37 @@ const menuItems = [
   {
     title: "Overview",
     icon: LayoutDashboard,
-    url: "#",
+    url: "#overview",
   },
   {
     title: "Schedule",
     icon: Calendar,
-    url: "#",
+    url: "#schedule",
   },
   {
     title: "Workouts",
     icon: Activity,
-    url: "#",
+    url: "#workouts",
+  },
+  {
+    title: "Strava",
+    icon: Activity,
+    url: "#strava",
   },
   {
     title: "Progress",
     icon: TrendingUp,
-    url: "#",
+    url: "#progress",
   },
   {
     title: "Notes",
     icon: FileText,
-    url: "#",
+    url: "#notes",
   },
   {
     title: "Settings",
     icon: Settings,
-    url: "#",
+    url: "#settings",
   },
 ]
 

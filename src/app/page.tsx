@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Activity, Calendar, TrendingUp, Target } from "lucide-react"
 import { getAuthenticatedClient, clearAuthenticatedClient } from "@/lib/auth"
+import { StravaActivities } from "@/components/strava-activities"
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -130,6 +131,9 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Strava Activities */}
+            <StravaActivities />
           </div>
         </SidebarInset>
       </div>
