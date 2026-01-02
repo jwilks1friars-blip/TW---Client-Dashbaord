@@ -7,6 +7,24 @@ import { getAuthenticatedClient } from "@/lib/auth"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
+function LoadingCard() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle>Strava Connection</CardTitle>
+          <CardDescription>Loading...</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
+
 function StravaCallbackContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -36,7 +54,7 @@ function StravaCallbackContent() {
         setStravaToken(client.id, token)
         setStatus("success")
         setMessage("Strava connected successfully! Redirecting to dashboard...")
-        setTimeout(() => router.push("/"), 2000)
+        setTimeout(() => router.push("/overview"), 2000)
       })
       .catch((error) => {
         console.error("Strava connection error:", error)
@@ -68,7 +86,7 @@ function StravaCallbackContent() {
           )}
           {status === "error" && (
             <div className="text-center py-4">
-              <Button onClick={() => router.push("/")} className="mt-4">
+              <Button onClick={() => router.push("/overview")} className="mt-4">
                 Go to Dashboard
               </Button>
             </div>
@@ -81,21 +99,7 @@ function StravaCallbackContent() {
 
 export default function StravaCallbackPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle>Strava Connection</CardTitle>
-            <CardDescription>Loading...</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center justify-center py-8">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    }>
+    <Suspense fallback={<LoadingCard />}>
       <StravaCallbackContent />
     </Suspense>
   )
