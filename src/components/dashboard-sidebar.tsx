@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
+import Link from "next/link"
 import {
   Sidebar,
   SidebarContent,
@@ -15,12 +16,12 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
-import { 
-  LayoutDashboard, 
-  Calendar, 
-  Activity, 
-  TrendingUp, 
-  FileText, 
+import {
+  LayoutDashboard,
+  Calendar,
+  Activity,
+  TrendingUp,
+  FileText,
   Settings,
   LogOut
 } from "lucide-react"
@@ -30,42 +31,38 @@ const menuItems = [
   {
     title: "Overview",
     icon: LayoutDashboard,
-    url: "#overview",
+    url: "/",
   },
   {
     title: "Schedule",
     icon: Calendar,
-    url: "#schedule",
+    url: "/schedule",
   },
   {
     title: "Workouts",
     icon: Activity,
-    url: "#workouts",
-  },
-  {
-    title: "Strava",
-    icon: Activity,
-    url: "#strava",
+    url: "/workouts",
   },
   {
     title: "Progress",
     icon: TrendingUp,
-    url: "#progress",
+    url: "/progress",
   },
   {
     title: "Notes",
     icon: FileText,
-    url: "#notes",
+    url: "/notes",
   },
   {
     title: "Settings",
     icon: Settings,
-    url: "#settings",
+    url: "/settings",
   },
 ]
 
 export function DashboardSidebar() {
   const router = useRouter()
+  const pathname = usePathname()
   const [client, setClient] = useState<{ id: string; name: string } | null>(null)
 
   useEffect(() => {
@@ -98,11 +95,11 @@ export function DashboardSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url} className="flex items-center gap-2">
+                  <SidebarMenuButton asChild isActive={pathname === item.url}>
+                    <Link href={item.url} className="flex items-center gap-2">
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
