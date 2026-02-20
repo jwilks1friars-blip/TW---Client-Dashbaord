@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams
-  const accessToken = searchParams.get('access_token')
-  const perPage = searchParams.get('per_page') || '30'
+  const authHeader = request.headers.get('Authorization')
+  const accessToken = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null
+  const perPage = request.nextUrl.searchParams.get('per_page') || '30'
 
   if (!accessToken) {
     return NextResponse.json(
       { error: 'Access token required' },
-      { status: 400 }
+      { status: 401 }
     )
   }
 

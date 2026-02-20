@@ -23,41 +23,6 @@ export default function LoginPage() {
     }
   }, [router])
 
-  // Initialize default clients (same as existing system)
-  const initializeClients = () => {
-    if (typeof window === "undefined") return
-
-    const clients = localStorage.getItem("clientCredentials")
-    if (!clients) {
-      const defaultClients = {
-        "client1@example.com": {
-          password: "password123",
-          name: "Client One",
-        },
-        "client2@example.com": {
-          password: "password123",
-          name: "Client Two",
-        },
-      }
-      localStorage.setItem("clientCredentials", JSON.stringify(defaultClients))
-    } else {
-      const parsed = JSON.parse(clients)
-      const hasTestClients =
-        parsed["client1@example.com"] || parsed["client2@example.com"]
-      if (!hasTestClients) {
-        parsed["client1@example.com"] = {
-          password: "password123",
-          name: "Client One",
-        }
-        parsed["client2@example.com"] = {
-          password: "password123",
-          name: "Client Two",
-        }
-        localStorage.setItem("clientCredentials", JSON.stringify(parsed))
-      }
-    }
-  }
-
   const authenticateClient = (clientId: string, password: string) => {
     if (typeof window === "undefined") return false
 
@@ -84,9 +49,6 @@ export default function LoginPage() {
     e.preventDefault()
     setError("")
     setLoading(true)
-
-    // Initialize clients before login
-    initializeClients()
 
     if (!email || !password) {
       setError("Please enter both Email and Password")

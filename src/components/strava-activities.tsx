@@ -69,7 +69,7 @@ export function StravaActivities() {
 
       // Check if token is expired and refresh if needed
       if (token.expires_at && token.expires_at * 1000 < Date.now()) {
-        token = await refreshStravaToken(token.refresh_token)
+        token = await refreshStravaToken(token)
         setStravaToken(client.id, token)
       }
 

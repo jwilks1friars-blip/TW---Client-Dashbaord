@@ -81,14 +81,14 @@ export async function exchangeCodeForToken(code: string): Promise<StravaToken> {
 }
 
 export async function refreshStravaToken(
-  refreshToken: string
+  existingToken: StravaToken
 ): Promise<StravaToken> {
   const response = await fetch("/api/strava/refresh", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ refresh_token: refreshToken }),
+    body: JSON.stringify({ refresh_token: existingToken.refresh_token }),
   })
 
   if (!response.ok) {
@@ -101,14 +101,18 @@ export async function refreshStravaToken(
     access_token: data.access_token,
     refresh_token: data.refresh_token,
     expires_at: Date.now() / 1000 + data.expires_in,
-    athlete: {} as any, // Will be preserved from existing token
+    athlete: existingToken.athlete,
   }
 }
 
 export async function fetchStravaActivities(
   accessToken: string
 ): Promise<any[]> {
-  const response = await fetch(`/api/strava/activities?access_token=${accessToken}`)
+  const response = await fetch("/api/strava/activities", {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  })
   if (!response.ok) {
     const error = await response.json()
     throw new Error(error.error || "Failed to fetch activities")
