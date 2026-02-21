@@ -28,6 +28,9 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# signup data (stored locally / in /tmp on Vercel)
+/data
+
 # vercel
 .vercel
 

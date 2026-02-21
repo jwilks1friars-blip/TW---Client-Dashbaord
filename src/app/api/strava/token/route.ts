@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const STRAVA_CLIENT_ID = process.env.STRAVA_CLIENT_ID || '191041'
-const STRAVA_CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET || '687d19ec3c8800010c1e31a6b44c7df13b64d2d7'
+const STRAVA_CLIENT_ID = process.env.STRAVA_CLIENT_ID
+const STRAVA_CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
