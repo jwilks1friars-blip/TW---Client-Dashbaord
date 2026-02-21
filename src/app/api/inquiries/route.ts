@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readSignups, writeSignups } from '@/lib/signups'
 
-const API_KEY = process.env.INQUIRIES_API_KEY || 'tw-inquiries-key'
+const API_KEY = process.env.INQUIRIES_API_KEY || 'tw-inquiries-secret-key'
 
 function checkApiKey(request: NextRequest): boolean {
   const key = request.headers.get('x-api-key')
