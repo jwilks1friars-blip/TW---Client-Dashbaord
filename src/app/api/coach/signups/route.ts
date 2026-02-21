@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { readSignups, writeSignups } from '@/app/api/signup/route'
-import { isValidCoachSession } from '@/app/api/coach/login/route'
+import { readSignups, writeSignups } from '@/lib/signups'
+import { isValidCoachSession } from '@/lib/coach-auth'
 
 function checkAuth(request: NextRequest): boolean {
   const token = request.cookies.get('coach_session')?.value

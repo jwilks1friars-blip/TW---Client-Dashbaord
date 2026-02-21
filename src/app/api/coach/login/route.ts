@@ -1,20 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import crypto from 'crypto'
+import { createSessionToken } from '@/lib/coach-auth'
 
 const COACH_PASSWORD = process.env.COACH_PASSWORD || 'coach123'
-const SESSION_SECRET = process.env.SESSION_SECRET || 'tw-running-secret-2024'
-
-function generateSessionToken(password: string): string {
-  return crypto
-    .createHmac('sha256', SESSION_SECRET)
-    .update(password)
-    .digest('hex')
-}
-
-export function isValidCoachSession(token: string): boolean {
-  const expected = generateSessionToken(COACH_PASSWORD)
-  return token === expected
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,7 +16,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
     }
 
-    const token = generateSessionToken(password)
+    const token = createSessionToken()
 
     const response = NextResponse.json({ success: true })
     response.cookies.set('coach_session', token, {
